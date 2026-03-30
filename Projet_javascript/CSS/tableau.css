@@ -1,0 +1,42 @@
+.matable {
+  width: 100%;
+  border-collapse: collapse; /* fusion /suppression bordur tableau interne */
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* En-tête */
+.matable thead {
+  background: #4f46e5;
+  color: white;
+}
+
+.matable th {
+  padding: 15px;
+  font-weight: 600;
+}
+
+/* Lignes */
+.matable td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.matable tbody tr:hover {
+  background: #f3f4f6;
+}
+
+
+
+.matable a {
+  padding: 6px 12px;
+  background: #4f46e5;
+  color: white;
+  border-radius: 5px;
+}
+
+.matable a:hover {
+  background: #4338ca;
+}

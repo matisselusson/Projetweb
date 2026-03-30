@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Connexion</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../CSS/style.css" />
+</head>
+<body>
+  <header class="myheadermdp">
+    <a href="../HTML/page_acceuilMat.html" class="back-link" aria-label="Retour à l’accueil">
+      ← Retour à l’accueil
+    </a>
+    <img src="../PHOTO/myLogo.png" alt="Logo" class="imageheader" />
+  </header>
+
+
+
+    <section class="mySectionmdp">
+                <div class="Modularecell">
+        <h1 id="titre-connexion">Connexion</h1>
+
+        <form id="confirm-password-form" action="connexion.html" method="post">
+
+          
+          <div class="form-group">
+            <label for="password">Nouveau Mot de passe</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="••••••••"
+              required
+              minlength="6"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password_confirmed">Mot de passe confirmer</label>
+            <input
+              id="password_confirmed"
+              name="password_confirmed"
+              type="password"
+              placeholder="••••••••"
+              required
+              minlength="6"
+            />
+          </div>
+
+          <p class="error-message titanic" id="error-password-not-same">The Password is not the same.</p>
+
+
+          <div class="form-group">
+
+              <button type="submit" class="mybouton" href="tableaudebord.html">Se connecter</button>
+            </a>
+              <a href="vérification_email.html" class="mysecondbouton">Mot de passe oublié ?</a>
+          </div>
+
+        </form>
+      </div>
+    </section>
+
+</body>
+</html>

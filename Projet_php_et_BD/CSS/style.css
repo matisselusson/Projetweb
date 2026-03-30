@@ -1,0 +1,31 @@
+/* Mes Variables */
+
+@import "variable.css";
+
+/* option de la page */
+
+@import "body.css";
+
+/* Mes différente section principale */
+
+@import "section.css";
+
+/* Header and Sidebar */
+
+@import "header_sidebar.css";
+
+/* case */
+
+@import "case.css";
+
+/* gestion form */
+
+@import "form.css";
+
+/* gestion tabeau */
+
+@import "tableau.css";
+
+/* gestion image */
+
+@import "image.css";
