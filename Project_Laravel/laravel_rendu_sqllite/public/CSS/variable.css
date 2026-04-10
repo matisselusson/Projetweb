@@ -1,0 +1,13 @@
+
+/* header */
+:root{
+    --tailleheader:0px;
+    --longeursidebar:300px;
+    --longeurmysection:calc(100vw - var(--longeursidebar))
+}
+/* header mdp */
+
+:root{
+    --tailleheadermdp:150px;
+    
+}

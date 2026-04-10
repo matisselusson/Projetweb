@@ -1,0 +1,54 @@
+.mySection {
+  margin-left: var(--longeursidebar);
+  position: relative;
+  top: var(--tailleheader);
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.mySectionmdp {
+  position: relative;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.myProfile {
+  margin-left: var(--longeursidebar);
+  position: relative;
+  top: var(--tailleheader);
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.myProfile label {
+  margin: 5px;
+}
+
+.myProfile button {
+  margin-top: 10px;
+}
+
+.mystageprofile {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.mySectionticket {
+  margin-left: var(--longeursidebar);
+  position: relative;
+  top: var(--tailleheader);
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}

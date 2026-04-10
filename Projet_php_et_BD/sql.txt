@@ -1,0 +1,143 @@
+
+DROP TABLE IF EXISTS temps_passes;
+DROP TABLE IF EXISTS tickets;
+DROP TABLE IF EXISTS projets_collaborateurs;
+DROP TABLE IF EXISTS contrats;
+DROP TABLE IF EXISTS projets;
+DROP TABLE IF EXISTS clients;
+DROP TABLE IF EXISTS utilisateurs;
+
+
+
+CREATE TABLE utilisateurs (
+    id           INT AUTO_INCREMENT PRIMARY KEY,
+    nom          VARCHAR(100) NOT NULL,
+    prenom       VARCHAR(100) NOT NULL,
+    email        VARCHAR(255) NOT NULL UNIQUE,
+    mot_de_passe VARCHAR(255) NOT NULL,
+    role         VARCHAR(50)  NOT NULL DEFAULT 'collaborateur',
+    cree_le      DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE clients (
+    id        INT AUTO_INCREMENT PRIMARY KEY,
+    nom       VARCHAR(255) NOT NULL,
+    email     VARCHAR(255),
+    telephone VARCHAR(20),
+    cree_le   DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE projets (
+    id          INT AUTO_INCREMENT PRIMARY KEY,
+    titre       VARCHAR(255) NOT NULL,
+    description TEXT,
+    priorite    VARCHAR(50)  NOT NULL DEFAULT 'Moyenne',
+    statut      VARCHAR(50)  NOT NULL DEFAULT 'Nouveau',
+    client_id   INT NOT NULL,
+    cree_le     DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (client_id) REFERENCES clients(id)
+);
+
+CREATE TABLE projets_collaborateurs (
+    projet_id      INT NOT NULL,
+    utilisateur_id INT NOT NULL,
+    PRIMARY KEY (projet_id, utilisateur_id),
+    FOREIGN KEY (projet_id)      REFERENCES projets(id),
+    FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs(id)
+);
+
+CREATE TABLE contrats (
+    id              INT AUTO_INCREMENT PRIMARY KEY,
+    projet_id       INT NOT NULL UNIQUE,
+    heures_incluses FLOAT NOT NULL DEFAULT 0,
+    taux_horaire    FLOAT DEFAULT NULL,
+    date_debut      DATE,
+    date_fin        DATE,
+    cree_le         DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (projet_id) REFERENCES projets(id)
+);
+
+CREATE TABLE tickets (
+    id           INT AUTO_INCREMENT PRIMARY KEY,
+    titre        VARCHAR(255) NOT NULL,
+    description  TEXT,
+    priorite     VARCHAR(50)  NOT NULL DEFAULT 'Moyenne',
+    statut       VARCHAR(50)  NOT NULL DEFAULT 'Nouveau',
+    type         VARCHAR(50)  NOT NULL DEFAULT 'Inclus',
+    projet_id    INT NOT NULL,
+    assigne_id   INT,
+    temps_estime FLOAT DEFAULT NULL,
+    cree_le      DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (projet_id)  REFERENCES projets(id),
+    FOREIGN KEY (assigne_id) REFERENCES utilisateurs(id)
+);
+
+CREATE TABLE temps_passes (
+    id             INT AUTO_INCREMENT PRIMARY KEY,
+    ticket_id      INT NOT NULL,
+    utilisateur_id INT NOT NULL,
+    duree          FLOAT NOT NULL,
+    date_saisie    DATE NOT NULL,
+    commentaire    TEXT,
+    cree_le        DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (ticket_id)      REFERENCES tickets(id),
+    FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs(id)
+);
+
+
+
+
+INSERT INTO utilisateurs (nom, prenom, email, mot_de_passe, role) VALUES
+('Admin',    'Super',  'admin@ticketing.fr',  SHA2('admin123', 256),  'admin'),
+('Dupont',   'Marie',  'marie@ticketing.fr',  SHA2('marie123', 256),  'collaborateur'),
+('Martin',   'Alex',   'alex@ticketing.fr',   SHA2('alex123', 256),   'collaborateur'),
+('Benali',   'Sofia',  'sofia@ticketing.fr',  SHA2('sofia123', 256),  'collaborateur'),
+('Lambert',  'Yanis',  'yanis@ticketing.fr',  SHA2('yanis123', 256),  'collaborateur'),
+('Petit',    'Claire', 'claire@ticketing.fr', SHA2('claire123', 256), 'collaborateur'),
+('Moreau',   'Rayan',  'rayan@ticketing.fr',  SHA2('rayan123', 256),  'collaborateur'),
+('Bernard',  'Lucie',  'lucie@ticketing.fr',  SHA2('lucie123', 256),  'collaborateur'),
+('Rousseau', 'Omar',   'omar@ticketing.fr',   SHA2('omar123', 256),   'collaborateur'),
+('Client',   'Acme',   'contact@acme.fr',     SHA2('acme123', 256),   'client'),
+('Client',   'TechCorp','contact@techcorp.fr', SHA2('techcorp123', 256),'client');
+
+
+INSERT INTO clients (nom, email, telephone) VALUES
+('Acme Corporation', 'contact@acme.fr',     '01 23 45 67 89'),  -- id = 1
+('TechCorp',         'contact@techcorp.fr', '01 98 76 54 32');  -- id = 2
+
+
+INSERT INTO projets (titre, description, priorite, statut, client_id) VALUES
+('Site Web',           'Développement et amélioration du site web principal.',            'Urgent',  'En cours', 1),  -- id = 1
+('Application Mobile', 'Application mobile iOS et Android.',                              'Moyenne', 'Terminé',  2),  -- id = 2
+('API',                'Développement et maintenance de l\'API REST.',                    'Haute',   'En cours', 2),  -- id = 3
+('Back-Office',        'Interface d\'administration pour gérer utilisateurs et contenus.','Faible',  'Validé',   1);  -- id = 4
+
+INSERT INTO projets_collaborateurs VALUES (1,2),(1,3);
+INSERT INTO projets_collaborateurs VALUES (2,4),(2,5);
+INSERT INTO projets_collaborateurs VALUES (3,6),(3,7);
+INSERT INTO projets_collaborateurs VALUES (4,8),(4,9);
+
+INSERT INTO contrats (projet_id, heures_incluses, taux_horaire, date_debut, date_fin) VALUES
+(1, 100, 120, '2025-01-01', '2025-12-31'),
+(2,  50,  90, '2025-01-01', '2025-06-30'),
+(3,  80, 110, '2025-01-01', '2025-12-31'),
+(4,  30, 100, '2025-01-01', '2025-12-31');
+
+INSERT INTO tickets (titre, description, priorite, statut, type, projet_id, assigne_id, temps_estime) VALUES
+('Erreur page login',                    'Correction d\'une erreur empêchant certains utilisateurs de se connecter.',                'Haute',    'Nouveau',  'Inclus',     1, 2, 2),
+('Ajouter bouton Exporter',              'Ajout d\'un bouton permettant d\'exporter les données au format CSV ou Excel.',            'Moyenne',  'En cours', 'Facturable', 1, 3, 3),
+('Crash au démarrage (Android)',         'Correction d\'un crash qui survient au lancement de l\'application sur Android.',         'Critique', 'En cours', 'Inclus',     2, 4, 5),
+('Mode sombre pour iOS',                 'Ajout d\'un thème sombre pour améliorer le confort visuel sur iOS.',                      'Faible',   'À valider','Facturable', 2, 5, 4),
+('Pagination sur /v2/users',             'Implémentation d\'un système de pagination pour l\'API.',                                 'Moyenne',  'Nouveau',  'Inclus',     3, 6, 3),
+('Erreur 500 sur /auth/refresh',         'Correction d\'une erreur serveur lors du rafraîchissement du token.',                     'Haute',    'Validé',   'Facturable', 3, 7, 2),
+('Gestion avancée des rôles',            'Ajout d\'un système avancé de gestion des rôles et permissions dans l\'interface admin.', 'Haute',    'En cours', 'Facturable', 4, 8, 6),
+('Optimiser les performances du tableau','Amélioration du chargement et de l\'affichage des tableaux dans le back-office.',         'Faible',   'Nouveau',  'Inclus',     4, 9, 2);
+
+INSERT INTO temps_passes (ticket_id, utilisateur_id, duree, date_saisie, commentaire) VALUES
+(1, 2, 1.5, '2025-03-01', 'Analyse du problème'),
+(1, 2, 0.5, '2025-03-02', 'Correction appliquée'),
+(2, 3, 2.0, '2025-03-03', 'Développement du bouton'),
+(3, 4, 3.0, '2025-03-04', 'Debug sur émulateur Android'),
+(3, 4, 1.5, '2025-03-05', 'Tests sur device réel'),
+(6, 7, 2.0, '2025-03-01', 'Correction et déploiement'),
+(7, 8, 4.0, '2025-03-06', 'Implémentation du système de rôles');
