@@ -17,7 +17,5 @@ class Ticket extends Model {
     ];
 
     public function projet()       { return $this->belongsTo(Projet::class); }
-    public function creator()      { return $this->belongsTo(User::class); }
     public function assignee()     { return $this->belongsToMany(User::class); }
-    public function validator()    { return $this->belongsTo(User::class); }
 }

@@ -27,7 +27,12 @@
 
   <div class="cell" id="ticket_assignee">
     <div class="title-cell">Assigné à</div>
-   <div class="number-cell">{{ $ticket->assignee->pluck('name')->join(', ') }}</div>
+   <div class="number-cell">{{ $ticket->assignee->pluck('name')->join(', ')  ?? 'marche pas'}}</div>
+  </div>
+
+  <div class="cell" id="ticket_title">
+    <div class="title-cell">Créateur</div>
+    <div class="number-cell">{{ $use->name ?? 'marche pas' }}</div>
   </div>
 
 

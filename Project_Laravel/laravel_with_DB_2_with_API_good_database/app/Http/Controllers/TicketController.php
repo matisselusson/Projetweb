@@ -17,7 +17,7 @@ class TicketController extends Controller
         $user   = auth()->user();
         
         $myuser = $user->myuser;
-        
+
         if($myuser->role != 'administrateur'){
             $clients=$myuser->clients;
             $projets = Projet::whereIn('client_id',$clients->pluck('id'))->get();
@@ -29,7 +29,6 @@ class TicketController extends Controller
             $projets = Projet::all();
             $tickets = Ticket::all();
         }
-        
         return view('tickets.index', compact('tickets', 'projets','myuser'));
     }
 
@@ -104,8 +103,11 @@ class TicketController extends Controller
     {
         $user = auth()->user();
         $myuser = $user->myuser;
-        $ticket  = Ticket::with(['projet', 'creator', 'assignee'])->findOrFail($id);
-        return view('tickets.show', compact('ticket','myuser'));
+
+        $ticket  = Ticket::with(['projet', 'assignee'])->findOrFail($id);
+        $use= User::where('id', $ticket->created_by)->first();
+
+        return view('tickets.show', compact('ticket','myuser','use'));
     }
 
     public function storeApi(Request $request)

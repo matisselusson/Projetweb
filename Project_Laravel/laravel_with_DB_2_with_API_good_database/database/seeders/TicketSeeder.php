@@ -19,7 +19,7 @@ class TicketSeeder extends Seeder
                 'statut'        => 'En cours',
                 'type'          => 'Facturable',
                 'projet_id'     => 2,
-                'created_by'  => 12,
+                'created_by'  => 1,
                 'estimated_minutes' => 240,
             ],
             [
@@ -29,7 +29,7 @@ class TicketSeeder extends Seeder
                 'statut'        => 'Nouveau',
                 'type'          => 'Facturable',
                 'projet_id'     => 1,
-                'created_by'  => 12,
+                'created_by'  => 2,
                 'estimated_minutes' => 240,
             ],
             [
@@ -39,7 +39,7 @@ class TicketSeeder extends Seeder
                 'statut'        => 'Nouveau',
                 'type'          => 'Inclus',
                 'projet_id'     => 4,
-                'created_by'  => 12,
+                'created_by'  => 3,
                 'estimated_minutes' => 240,
             ],
             [
@@ -49,7 +49,7 @@ class TicketSeeder extends Seeder
                 'statut'        => 'En attente',
                 'type'          => 'Facturable',
                 'projet_id'     => 3,
-                'created_by'  => 13,
+                'created_by'  => 6,
                 'estimated_minutes' => 240,
             ],
             [
@@ -59,7 +59,7 @@ class TicketSeeder extends Seeder
                 'statut'        => 'Résolu',
                 'type'          => 'Inclus',
                 'projet_id'     => 1,
-                'created_by'  => 12,
+                'created_by'  => 8,
                 'estimated_minutes' => 240,
             ],
         ];

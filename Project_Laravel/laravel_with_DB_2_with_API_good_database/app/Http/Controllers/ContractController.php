@@ -12,7 +12,14 @@ class ContractController extends Controller
     {
         $user   = auth()->user();
         $myuser = $user->myuser;
-        $contrats = Contract::with('projet')->get();
+        if($myuser->role != 'administrateur'){
+            $projets  = Projet::whereIn('client_id', $myuser->clients->pluck('id'))->get();
+            $contrats = Contract::whereIn('projet_id', $projets->pluck('id'))->with('projet')->get();
+
+        }
+        else{
+            $contrats = Contract::all();
+        }
         return view('contrats.index', compact('contrats','myuser'));
     }
 

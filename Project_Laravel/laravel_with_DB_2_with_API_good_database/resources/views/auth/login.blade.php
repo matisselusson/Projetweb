@@ -60,7 +60,7 @@
           <div class="form-group">
             <button type="submit" class="mybouton">Se connecter</button>
             
-            @if (Route::has('password.request'))
+            @if (Route::has('jaaj.request'))
                 <a href="{{ route('password.request') }}" class="mysecondbouton">Mot de passe oublié ?</a>
             @endif
           </div>

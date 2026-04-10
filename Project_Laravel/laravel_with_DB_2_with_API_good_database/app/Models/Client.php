@@ -11,7 +11,7 @@ class Client extends Model {
 
     public function projets() { return $this->hasMany(Projet::class); }
     public function users()   { return $this->hasMany(User::class); }
-    public function myusers() {return $this->belongsToMany(Myuser::class, 'client_myuser', 'client_id', 'myuser_id');}
+    public function myusers() {return $this->belongsToMany(Myuser::class);}
 
 }
 

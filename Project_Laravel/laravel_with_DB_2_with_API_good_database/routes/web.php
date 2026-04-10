@@ -19,24 +19,34 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-    
-    Route::get('/projets', [ProjectController::class, 'index'])->name('projects.index');
-    Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
-    Route::post('/projets', [ProjectController::class, 'store'])->name('projects.store');
-    Route::get('/projets/{id}', [ProjectController::class, 'show'])->name('projects.show');
+Route::middleware(['auth', 'role:administrateur,collaborateur'])->group(function () {
 
-    Route::get('/contrats', [ContractController::class, 'index'])->name('contrats.index');
-    Route::get('/contrats/create', [ContractController::class, 'create'])->name('contrats.create');
-    Route::post('/contrats', [ContractController::class, 'store'])->name('contrats.store');
-    Route::get('/contrats/{id}', [ContractController::class, 'show'])->name('contrats.show');
-
-    Route::get('/tickets', [TicketController::class, 'index'])->name('tickets.index');
     Route::get('/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
     Route::post('/tickets/create2', [TicketController::class, 'create2'])->name('tickets.create2');
     Route::post('/tickets/store', [TicketController::class, 'store'])->name('tickets.store');
+});
+
+Route::middleware(['auth', 'role:administrateur'])->group(function () {
+
+    Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
+    Route::post('/projets', [ProjectController::class, 'store'])->name('projects.store');
+    
+    Route::get('/contrats/create', [ContractController::class, 'create'])->name('contrats.create');
+    Route::post('/contrats', [ContractController::class, 'store'])->name('contrats.store');
+});
+
+
+Route::middleware('auth')->group(function () {
+    
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+
+    Route::get('/projets', [ProjectController::class, 'index'])->name('projects.index');
+    Route::get('/projets/{id}', [ProjectController::class, 'show'])->name('projects.show');
+
+    Route::get('/contrats', [ContractController::class, 'index'])->name('contrats.index');
+    Route::get('/contrats/{id}', [ContractController::class, 'show'])->name('contrats.show');
+
+    Route::get('/tickets', [TicketController::class, 'index'])->name('tickets.index');
     Route::get('/tickets/{id}', [TicketController::class, 'show'])->name('tickets.show');
 
 });
