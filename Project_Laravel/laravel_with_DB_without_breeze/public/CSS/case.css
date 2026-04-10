@@ -1,0 +1,154 @@
+
+.cell {
+
+            background: white;
+
+  width: 150px;
+  height: 150px;
+  flex: 0 0 150px;
+  box-sizing: border-box;
+ border-radius: 15px;
+ margin: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+    justify-content: space-around;
+    font-size: 18px;
+  font-weight: bold;
+}
+.Modularecell {
+
+            background: white;
+  padding: 30px;
+  box-sizing: border-box;
+ border-radius: 15px;
+ margin: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+
+             display: flex;
+  flex-direction: column;
+    justify-content: space-around;
+    font-size: 18px;
+  font-weight: bold;
+}
+    .profile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      margin: 20px;
+      margin-top: 40px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+
+.form_question{
+               display: flex;
+  flex-direction: column;
+    justify-content: space-around;
+
+}
+/* ID ticket - Bleu pétrole */
+#id_ticket{
+  background: #0F172A;
+  border-color: #1E293B;
+}
+
+#id_ticket .title-cell,
+#id_ticket .number-cell{ color: #E0F2FE; }
+
+/* Titre - Bleu */
+#ticket_title{
+  background: #EFF6FF;
+  border-color: #BFDBFE;
+}
+
+#ticket_title .number-cell{ color: #1D4ED8; }
+
+/* Priorité - Violet (Haute) */
+#ticket_priority{
+  background: #F5F3FF;
+  border-color: #DDD6FE;
+}
+
+#ticket_priority .number-cell{ color: #6D28D9; }
+
+/* Statut - Orange (Ouvert) */
+#ticket_status{
+  background: #FFF7ED;
+  border-color: #FED7AA;
+}
+
+#ticket_status .number-cell{ color: #EA580C; }
+
+/* Assigné à - Ambre */
+#ticket_assignee{
+  background: #FFFBEB;
+  border-color: #FDE68A;
+}
+
+#ticket_assignee .number-cell{ color: #D97706; }
+
+
+
+
+
+
+
+
+
+
+
+
+/* Total - Bleu */
+#tickettotal{
+  background: #EFF6FF;
+  border-color: #BFDBFE;
+}
+
+#tickettotal .number-cell{ color: #1D4ED8; }
+
+/* Nouveau - Violet */
+#ticketnouveau{
+  background: #F5F3FF;
+  border-color: #DDD6FE;
+}
+
+#ticketnouveau .number-cell{ color: #6D28D9; }
+
+/* En cours - Orange */
+#ticketencours{
+  background: #FFF7ED;
+  border-color: #FED7AA;
+}
+
+#ticketencours .number-cell{ color: #EA580C; }
+
+/* En attente client - Ambre */
+#ticketattenteclient{
+  background: #FFFBEB;
+  border-color: #FDE68A;
+}
+
+#ticketattenteclient .number-cell{ color: #D97706; }
+
+/* Terminé - Vert */
+#tickettermine{
+  background: #ECFDF5;
+  border-color: #A7F3D0;
+}
+
+#tickettermine .number-cell{ color: #059669; }
+
+/* Pas fini - Rouge */
+#ticketurgent{
+  background: #FEF2F2;
+  border-color: #FECACA;
+}
+
+#ticketurgent .number-cell{ color: #DC2626; }

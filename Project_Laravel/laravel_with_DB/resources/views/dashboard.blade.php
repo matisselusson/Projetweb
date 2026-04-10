@@ -1,40 +1,17 @@
-@extends('layouts.app')
-@section('title', 'Tableau de bord')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Dashboard') }}
+        </h2>
+    </x-slot>
 
-@section('content')
-<section class="mySection">
-
-  <h2>Statistique des tickets</h2>
-
-  <div class="cell" id="tickettotal">
-    <div class="title-cell">Nombre de tickets total</div>
-    <div class="number-cell">{{ $stats['total'] }}</div>
-  </div>
-
-  <div class="cell" id="ticketnouveau">
-    <div class="title-cell">Tickets nouveaux</div>
-    <div class="number-cell">{{ $stats['nouveau'] }}</div>
-  </div>
-
-  <div class="cell" id="ticketencours">
-    <div class="title-cell">Tickets en cours</div>
-    <div class="number-cell">{{ $stats['en_cours'] }}</div>
-  </div>
-
-  <div class="cell" id="ticketattenteclient">
-    <div class="title-cell">Tickets en attente client</div>
-    <div class="number-cell">{{ $stats['attente_client'] }}</div>
-  </div>
-
-  <div class="cell" id="tickettermine">
-    <div class="title-cell">Tickets terminés</div>
-    <div class="number-cell">{{ $stats['termine'] }}</div>
-  </div>
-
-  <div class="cell" id="ticketurgent">
-    <div class="title-cell">Tickets à traiter en urgence</div>
-    <div class="number-cell">{{ $stats['urgent'] }}</div>
-  </div>
-
-</section>
-@endsection
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    {{ __("You're logged in!") }}
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>

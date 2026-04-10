@@ -1,0 +1,9 @@
+{
+    "titre": "Bug sur la page login",
+    "description": "Le bouton de connexion ne répond pas",
+    "priorite": "haute",
+    "statut": "ouvert",
+    "type": "bug",
+    "projet_id": 1,
+    "assigne": "Jean Dupont"
+}

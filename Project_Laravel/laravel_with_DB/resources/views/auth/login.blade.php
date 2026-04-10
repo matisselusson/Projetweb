@@ -1,63 +1,47 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <title>Connexion</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="{{ asset('CSS/style.css') }}" />
-  <link rel="icon" type="image/png" href="{{ asset('PHOTO/myLogo.png') }}">
-</head>
-<body>
-  <header class="myheadermdp">
-    <a href="{{ route('home') }}" class="back-link" aria-label="Retour à l'accueil">
-      ← Retour à l'accueil
-    </a>
-    <img src="{{ asset('PHOTO/myLogo.png') }}" alt="Logo Evil Corp" class="imageheader">
-  </header>
+<x-guest-layout>
+    <!-- Session Status -->
+    <x-auth-session-status class="mb-4" :status="session('status')" />
 
-  <section class="mySectionmdp">
-    <div class="Modularecell">
-      <div class="login-card">
-        <div class="card-header">
-          <h1 id="titre-connexion">Connexion</h1>
-          <p>Bienvenue ! Entrez vos identifiants pour continuer.</p>
+    <form method="POST" action="{{ route('login') }}">
+        @csrf
+
+        <!-- Email Address -->
+        <div>
+            <x-input-label for="email" :value="__('Email')" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <form class="login-form" action="{{ route('dashboard') }}" method="GET">
-          @csrf
+        <!-- Password -->
+        <div class="mt-4">
+            <x-input-label for="password" :value="__('Password')" />
 
-          <div class="form-group">
-            <label for="email">Adresse e-mail</label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="exemple@domaine.com"
-              required
-              autocomplete="email"
-            >
-          </div>
+            <x-text-input id="password" class="block mt-1 w-full"
+                            type="password"
+                            name="password"
+                            required autocomplete="current-password" />
 
-          <div class="form-group">
-            <label for="password">Mot de passe</label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              placeholder="••••••••"
-              required
-              minlength="6"
-              autocomplete="current-password"
-            >
-          </div>
+            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        </div>
 
-          <div class="form-group">
-            <button type="submit" class="mybouton">Se connecter</button>
-            <a href="{{ route('forgot-password') }}" class="mysecondbouton">Mot de passe oublié ?</a>
-          </div>
-        </form>
-      </div>
-    </div>
-  </section>
-</body>
-</html>
+        <!-- Remember Me -->
+        <div class="block mt-4">
+            <label for="remember_me" class="inline-flex items-center">
+                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+            </label>
+        </div>
+
+        <div class="flex items-center justify-end mt-4">
+            @if (Route::has('password.request'))
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                    {{ __('Forgot your password?') }}
+                </a>
+            @endif
+
+            <x-primary-button class="ms-3">
+                {{ __('Log in') }}
+            </x-primary-button>
+        </div>
+    </form>
+</x-guest-layout>
